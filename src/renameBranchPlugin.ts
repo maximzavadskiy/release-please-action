@@ -31,14 +31,11 @@ export class RenameBranches extends ManifestPlugin {
           path,
           pullRequest: {
             ...pullRequest,
-            labels: [...pullRequest.labels, 'debug-touched-by-rename-plugin'],
+            headRefName: "release-randomversion-v1.2.3-rc"
           },
         };
       },
     );
-
-    core.info('renamed candidates'  + JSON.stringify(modifiedCandidates));
-    core.info('renamed candidates labels'  + JSON.stringify(modifiedCandidates?.[0]?.pullRequest.labels));
 
     return modifiedCandidates;
   }
