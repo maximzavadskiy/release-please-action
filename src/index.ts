@@ -13,7 +13,18 @@
 // limitations under the License.
 
 import * as core from '@actions/core';
-import {GitHub, Manifest, CreatedRelease, PullRequest, VERSION} from 'release-please';
+import {
+  GitHub,
+  Manifest,
+  CreatedRelease,
+  PullRequest,
+  VERSION,
+  registerPlugin,
+} from 'release-please';
+import {
+  RenameBranches,
+  renameBranchesPluginBuilder,
+} from './renameBranchPlugin';
 
 const DEFAULT_CONFIG_FILE = 'release-please-config.json';
 const DEFAULT_MANIFEST_FILE = '.release-please-manifest.json';
@@ -46,7 +57,7 @@ interface ActionInputs {
 
 function parseInputs(): ActionInputs {
   const inputs: ActionInputs = {
-    token: core.getInput('token', {required: true}),
+    token: core.getInput('token', { required: true }),
     releaseType: getOptionalInput('release-type'),
     path: getOptionalInput('path'),
     repoUrl: core.getInput('repo-url') || process.env.GITHUB_REPOSITORY || '',
@@ -81,7 +92,7 @@ function getOptionalBooleanInput(name: string): boolean | undefined {
 
 function loadOrBuildManifest(
   github: GitHub,
-  inputs: ActionInputs
+  inputs: ActionInputs,
 ): Promise<Manifest> {
   if (inputs.releaseType) {
     core.debug('Building manifest from config');
@@ -96,7 +107,7 @@ function loadOrBuildManifest(
       {
         fork: inputs.fork,
       },
-      inputs.path
+      inputs.path,
     );
   }
   const manifestOverrides = inputs.fork
@@ -110,15 +121,16 @@ function loadOrBuildManifest(
     github.repository.defaultBranch,
     inputs.configFile,
     inputs.manifestFile,
-    manifestOverrides
+    manifestOverrides,
   );
 }
 
 export async function main() {
-  core.info(`Running release-please version: ${VERSION}`)
+  core.info(`Running release-please version: ${VERSION}`);
+
+  registerPlugin('rename-branch', renameBranchesPluginBuilder);
   const inputs = parseInputs();
   const github = await getGitHubInstance(inputs);
-
   if (!inputs.skipGitHubRelease) {
     const manifest = await loadOrBuildManifest(github, inputs);
     core.debug('Creating releases');
@@ -164,7 +176,7 @@ function setPathOutput(path: string, key: string, value: string | boolean) {
 }
 
 function outputReleases(releases: (CreatedRelease | undefined)[]) {
-  releases = releases.filter(release => release !== undefined);
+  releases = releases.filter((release) => release !== undefined);
   const pathsReleased = [];
   core.setOutput('releases_created', releases.length > 0);
   if (releases.length) {
@@ -197,7 +209,7 @@ function outputReleases(releases: (CreatedRelease | undefined)[]) {
 }
 
 function outputPRs(prs: (PullRequest | undefined)[]) {
-  prs = prs.filter(pr => pr !== undefined);
+  prs = prs.filter((pr) => pr !== undefined);
   core.setOutput('prs_created', prs.length > 0);
   if (prs.length) {
     core.setOutput('pr', prs[0]);
@@ -206,7 +218,7 @@ function outputPRs(prs: (PullRequest | undefined)[]) {
 }
 
 if (require.main === module) {
-  main().catch(err => {
-    core.setFailed(`release-please failed: ${err.message}`)
-  })
+  main().catch((err) => {
+    core.setFailed(`release-please failed: ${err.message}`);
+  });
 }
