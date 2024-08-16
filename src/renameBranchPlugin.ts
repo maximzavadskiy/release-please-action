@@ -4,6 +4,8 @@ import {
   RepositoryConfig,
 } from "release-please/build/src/manifest";
 import { ManifestPlugin } from "release-please/build/src/plugin";
+import * as core from '@actions/core';
+import { CANCELLED } from "dns";
 
 export class RenameBranches extends ManifestPlugin {
   constructor(
@@ -17,7 +19,7 @@ export class RenameBranches extends ManifestPlugin {
   async run(
     candidates: CandidateReleasePullRequest[],
   ): Promise<CandidateReleasePullRequest[]> {
-    this.logger.info(
+    core.info(
       `Renaming branches for ${candidates.length} pull requests`,
     );
 
@@ -35,7 +37,7 @@ export class RenameBranches extends ManifestPlugin {
       },
     );
 
-    this.logger.debug('renamed candidates', JSON.stringify(modifiedCandidates));
+    core.info('renamed candidates'  + JSON.stringify(modifiedCandidates));
 
     return candidates;
   }

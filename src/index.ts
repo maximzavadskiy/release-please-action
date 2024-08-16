@@ -127,7 +127,7 @@ function loadOrBuildManifest(
 
 export async function main() {
   core.info(`Running release-please version: ${VERSION}`);
-
+  core.info(`Registering rename-branh plugin`);
   registerPlugin('rename-branch', renameBranchesPluginBuilder);
   const inputs = parseInputs();
   const github = await getGitHubInstance(inputs);
@@ -139,7 +139,8 @@ export async function main() {
 
   if (!inputs.skipGitHubPullRequest) {
     const manifest = await loadOrBuildManifest(github, inputs);
-    core.debug('Creating pull requests');
+    core.info(`Creating pull requests`);
+    core.info(`Plugins in config ${manifest.plugins}`);
     outputPRs(await manifest.createPullRequests());
   }
 }
