@@ -38,6 +38,7 @@ export class RenameBranches extends ManifestPlugin {
     );
 
     core.info('renamed candidates'  + JSON.stringify(modifiedCandidates));
+    core.info('renamed candidates labels'  + JSON.stringify(modifiedCandidates?.[0]?.pullRequest.labels));
 
     return candidates;
   }
