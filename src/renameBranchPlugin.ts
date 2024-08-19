@@ -5,7 +5,6 @@ import {
 } from "release-please/build/src/manifest";
 import { ManifestPlugin } from "release-please/build/src/plugin";
 import * as core from '@actions/core';
-import { CANCELLED } from "dns";
 import { Release } from "release-please/build/src/release";
 
 export class RenameBranches extends ManifestPlugin {
