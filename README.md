@@ -1,3 +1,4 @@
+Works with maximzavadskiy/test3-release-please with branches  e.g. release-release-please-v1.2.3-rc
 # Release Please Action
 
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
