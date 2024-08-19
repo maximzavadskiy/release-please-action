@@ -104,7 +104,7 @@ function loadOrBuildManifest(
         includeComponentInTag: inputs.includeComponentInTag,
         changelogHost: inputs.changelogHost,
         component: "",
-        // packageName: ""
+        packageName: ""
       },
       {
         fork: inputs.fork,
