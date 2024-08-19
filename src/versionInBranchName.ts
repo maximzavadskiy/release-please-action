@@ -5,7 +5,6 @@ import {
 } from "release-please/build/src/manifest";
 import { ManifestPlugin } from "release-please/build/src/plugin";
 import * as core from '@actions/core';
-import { Release } from "release-please/build/src/release";
 
 export class VersionInBranchName extends ManifestPlugin {
   constructor(
@@ -33,7 +32,7 @@ export class VersionInBranchName extends ManifestPlugin {
           path,
           pullRequest: {
             ...pullRequest,
-            headRefName: "release-release-please-v1.2.3-rc"
+            headRefName: `release-release-please-v${pullRequest.version}`
           },
         };
       },
