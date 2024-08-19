@@ -22,9 +22,8 @@ import {
   registerPlugin,
 } from 'release-please';
 import {
-  RenameBranches,
-  renameBranchesPluginBuilder,
-} from './renameBranchPlugin';
+  versionInBranchNamePluginBuilder,
+} from './versionInBranchName';
 
 const DEFAULT_CONFIG_FILE = 'release-please-config.json';
 const DEFAULT_MANIFEST_FILE = '.release-please-manifest.json';
@@ -127,7 +126,7 @@ function loadOrBuildManifest(
 
 export async function main() {
   core.info(`Running release-please version: ${VERSION}`);
-  registerPlugin('rename-branch', renameBranchesPluginBuilder); core.debug(`Registering rename-branch plugin`);
+  registerPlugin('rename-branch', versionInBranchNamePluginBuilder); core.debug(`Registering rename-branch plugin`);
   const inputs = parseInputs();
   const github = await getGitHubInstance(inputs);
   if (!inputs.skipGitHubRelease) {

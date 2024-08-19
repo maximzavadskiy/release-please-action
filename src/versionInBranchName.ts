@@ -7,7 +7,7 @@ import { ManifestPlugin } from "release-please/build/src/plugin";
 import * as core from '@actions/core';
 import { Release } from "release-please/build/src/release";
 
-export class RenameBranches extends ManifestPlugin {
+export class VersionInBranchName extends ManifestPlugin {
   constructor(
     github: GitHub,
     targetBranch: string,
@@ -43,8 +43,8 @@ export class RenameBranches extends ManifestPlugin {
   }
 }
 
-export const renameBranchesPluginBuilder = (options: PluginFactoryOptions) => {
-  return new RenameBranches(
+export const versionInBranchNamePluginBuilder = (options: PluginFactoryOptions) => {
+  return new VersionInBranchName(
     options.github,
     options.targetBranch,
     options.repositoryConfig,
