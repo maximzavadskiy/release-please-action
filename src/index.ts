@@ -103,8 +103,8 @@ function loadOrBuildManifest(
         releaseType: inputs.releaseType,
         includeComponentInTag: inputs.includeComponentInTag,
         changelogHost: inputs.changelogHost,
-        component: "",
-        packageName: ""
+        component: "-",
+        packageName: "-"
       },
       {
         fork: inputs.fork,
