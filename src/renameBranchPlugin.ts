@@ -19,9 +19,9 @@ export class RenameBranches extends ManifestPlugin {
   async run(
     candidates: CandidateReleasePullRequest[],
   ): Promise<CandidateReleasePullRequest[]> {
-    core.info(`Repo config keys: ${Object.keys(this.repositoryConfig)}`)
-    core.info(`Repo config: ${JSON.stringify(this.repositoryConfig)}`)
-    core.info(
+    core.debug(`Repo config keys: ${Object.keys(this.repositoryConfig)}`)
+    core.debug(`Repo config: ${JSON.stringify(this.repositoryConfig)}`)
+    core.debug(
       `Renaming branches for ${candidates.length} pull requests`,
     );
 
@@ -43,11 +43,11 @@ export class RenameBranches extends ManifestPlugin {
   }
 
   preconfigure(strategiesByPath: Record<string, Strategy>, _commitsByPath: Record<string, Commit[]>, _releasesByPath: Record<string, Release>): Promise<Record<string, Strategy>> {
-    core.info(
+    core.debug(
       `preconfiguring strategines`,
     );
     for (let path in strategiesByPath) {
-      core.info(
+      core.debug(
         `strategy for path ${path}`
       );
       // @ts-ignore
