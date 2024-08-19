@@ -43,8 +43,9 @@ export class RenameBranches extends ManifestPlugin {
 
   preconfigure(strategiesByPath: Record<string, Strategy>, _commitsByPath: Record<string, Commit[]>, _releasesByPath: Record<string, Release>): Promise<Record<string, Strategy>> {
     core.info(
-      `preconfiguring strategines ${JSON.stringify(strategiesByPath)}`,
+      `preconfiguring strategines`,
     );
+    core.info(JSON.stringify(strategiesByPath))
     for (let path in strategiesByPath) {
       // @ts-ignore
       strategiesByPath[path].component = "mine"  // TODO find how to change stragegy.component / strategy.packageName
