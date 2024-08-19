@@ -34,7 +34,7 @@ export class RenameBranches extends ManifestPlugin {
           path,
           pullRequest: {
             ...pullRequest,
-            headRefName: "release-version-v1.2.3-rc"
+            headRefName: "release-release-please-v1.2.3-rc"
           },
         };
       },
