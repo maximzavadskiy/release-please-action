@@ -20,6 +20,8 @@ export class RenameBranches extends ManifestPlugin {
   async run(
     candidates: CandidateReleasePullRequest[],
   ): Promise<CandidateReleasePullRequest[]> {
+    core.info(`Repo config keys: ${Object.keys(this.repositoryConfig)}`)
+    core.info(`Repo config: ${JSON.stringify(this.repositoryConfig)}`)
     core.info(
       `Renaming branches for ${candidates.length} pull requests`,
     );
