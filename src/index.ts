@@ -129,7 +129,7 @@ function loadOrBuildManifest(
 
 export async function main() {
   core.info(`Running release-please version: ${VERSION}`);
-  // registerPlugin('rename-branch', renameBranchesPluginBuilder); core.info(`Registering rename-branh plugin`);
+  registerPlugin('rename-branch', renameBranchesPluginBuilder); core.info(`Registering rename-branh plugin`);
   const inputs = parseInputs();
   const github = await getGitHubInstance(inputs);
   if (!inputs.skipGitHubRelease) {
