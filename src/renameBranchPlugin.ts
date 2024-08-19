@@ -20,34 +20,32 @@ export class RenameBranches extends ManifestPlugin {
   async run(
     candidates: CandidateReleasePullRequest[],
   ): Promise<CandidateReleasePullRequest[]> {
-    return candidates
-    //   core.info(
-    //     `Renaming branches for ${candidates.length} pull requests`,
-    //   );
+    core.info(
+      `Renaming branches for ${candidates.length} pull requests`,
+    );
 
-    //   const modifiedCandidates = candidates.map(
-    //     ({ config, path, pullRequest }) => {
-    //       pullRequest.labels;
-    //       return {
-    //         config,
-    //         path,
-    //         pullRequest: {
-    //           ...pullRequest,
-    //           headRefName: "release-randomversion-v1.2.3-rc"
-    //         },
-    //       };
-    //     },
-    //   );
+    const modifiedCandidates = candidates.map(
+      ({ config, path, pullRequest }) => {
+        pullRequest.labels;
+        return {
+          config,
+          path,
+          pullRequest: {
+            ...pullRequest,
+            headRefName: "release-randomversion-v1.2.3-rc"
+          },
+        };
+      },
+    );
 
-    //   return modifiedCandidates;
-    // }
-
-    // // TODO proper implementation should be here
-    // // preconfigure(strategiesByPath: Record<string, Strategy>, _commitsByPath: Record<string, Commit[]>, _releasesByPath: Record<string, Release>): Promise<Record<string, Strategy>> {
-    // //   for(let path in strategiesByPath) {
-    // //     strategiesByPath[path]. // TODO find how to change stragegy.component / strategy.packageName
-    // //   }
+    return modifiedCandidates;
   }
+
+  // // TODO proper implementation should be here
+  // // preconfigure(strategiesByPath: Record<string, Strategy>, _commitsByPath: Record<string, Commit[]>, _releasesByPath: Record<string, Release>): Promise<Record<string, Strategy>> {
+  // //   for(let path in strategiesByPath) {
+  // //     strategiesByPath[path]. // TODO find how to change stragegy.component / strategy.packageName
+  // //   }
 }
 
 export const renameBranchesPluginBuilder = (options: PluginFactoryOptions) => {
