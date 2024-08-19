@@ -1,4 +1,4 @@
-import { GitHub, PluginFactoryOptions } from "release-please";
+import { Commit, GitHub, PluginFactoryOptions, Strategy } from "release-please";
 import {
   CandidateReleasePullRequest,
   RepositoryConfig,
@@ -6,6 +6,7 @@ import {
 import { ManifestPlugin } from "release-please/build/src/plugin";
 import * as core from '@actions/core';
 import { CANCELLED } from "dns";
+import { Release } from "release-please/build/src/release";
 
 export class RenameBranches extends ManifestPlugin {
   constructor(
@@ -39,6 +40,13 @@ export class RenameBranches extends ManifestPlugin {
 
     return modifiedCandidates;
   }
+
+  // TODO proper implementation should be here
+  // preconfigure(strategiesByPath: Record<string, Strategy>, _commitsByPath: Record<string, Commit[]>, _releasesByPath: Record<string, Release>): Promise<Record<string, Strategy>> {
+  //   for(let path in strategiesByPath) {
+  //     strategiesByPath[path]. // TODO find how to change stragegy.component / strategy.packageName
+  //   }
+  // }
 }
 
 export const renameBranchesPluginBuilder = (options: PluginFactoryOptions) => {
