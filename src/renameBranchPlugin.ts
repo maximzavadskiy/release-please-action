@@ -32,7 +32,7 @@ export class RenameBranches extends ManifestPlugin {
           path,
           pullRequest: {
             ...pullRequest,
-            headRefName: "release-randomversion-v1.2.3-rc"
+            headRefName: "release-version-v1.2.3-rc"
           },
         };
       },
@@ -50,9 +50,9 @@ export class RenameBranches extends ManifestPlugin {
         `strategy for path ${path}`
       );
       // @ts-ignore
-      strategiesByPath[path].component = "mine"  // TODO find how to change stragegy.component / strategy.packageName
+      strategiesByPath[path].component = "version"  // TODO find how to change stragegy.component / strategy.packageName
       // @ts-ignore
-      strategiesByPath[path].packageName = "mine"  // TODO find how to change stragegy.component / strategy.packageName
+      strategiesByPath[path].packageName = "version"  // TODO find how to change stragegy.component / strategy.packageName
     }
     return Promise.resolve(strategiesByPath)
   }
