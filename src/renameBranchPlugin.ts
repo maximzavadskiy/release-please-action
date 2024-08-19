@@ -41,11 +41,18 @@ export class RenameBranches extends ManifestPlugin {
     return modifiedCandidates;
   }
 
-  // // TODO proper implementation should be here
-  // // preconfigure(strategiesByPath: Record<string, Strategy>, _commitsByPath: Record<string, Commit[]>, _releasesByPath: Record<string, Release>): Promise<Record<string, Strategy>> {
-  // //   for(let path in strategiesByPath) {
-  // //     strategiesByPath[path]. // TODO find how to change stragegy.component / strategy.packageName
-  // //   }
+  preconfigure(strategiesByPath: Record<string, Strategy>, _commitsByPath: Record<string, Commit[]>, _releasesByPath: Record<string, Release>): Promise<Record<string, Strategy>> {
+    core.info(
+      `preconfiguring strategines ${JSON.stringify(strategiesByPath)}`,
+    );
+    for (let path in strategiesByPath) {
+      // @ts-ignore
+      strategiesByPath[path].component = "mine"  // TODO find how to change stragegy.component / strategy.packageName
+      // @ts-ignore
+      strategiesByPath[path].packageName = "mine"  // TODO find how to change stragegy.component / strategy.packageName
+    }
+    return Promise.resolve(strategiesByPath)
+  }
 }
 
 export const renameBranchesPluginBuilder = (options: PluginFactoryOptions) => {
