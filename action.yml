@@ -62,6 +62,9 @@ inputs:
     description: 'The proto://host where commits live. Default `https://github.com`'
     required: false
     default: ${{ github.server_url }}
+  component-name-in-branch:
+    description: 'The component name that release-please requires to match in package.json. Currently for e.g. @flowplayer/native component name is "native"'
+    required: true
 runs:
   using: 'node20'
   main: 'dist/index.js'

@@ -24,6 +24,8 @@ export class VersionInBranchName extends ManifestPlugin {
       `Renaming branches for ${candidates.length} pull requests`,
     );
 
+    const componentName = core.getInput('component-name-in-branch', { required: true });
+
     const modifiedCandidates = candidates.map(
       ({ config, path, pullRequest }) => {
         pullRequest.labels;
@@ -35,7 +37,7 @@ export class VersionInBranchName extends ManifestPlugin {
           path,
           pullRequest: {
             ...pullRequest,
-            headRefName: `release-release-please-v${pullRequest.version}`
+            headRefName: `release-${componentName}-v${pullRequest.version}`
           },
         };
       },
