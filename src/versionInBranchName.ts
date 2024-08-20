@@ -27,6 +27,9 @@ export class VersionInBranchName extends ManifestPlugin {
     const modifiedCandidates = candidates.map(
       ({ config, path, pullRequest }) => {
         pullRequest.labels;
+        core.info(` packageName ${config.packageName} `)
+        core.info(` component ${config.component} `)
+        core.info(` rest ${JSON.stringify(config)} `)
         return {
           config,
           path,
